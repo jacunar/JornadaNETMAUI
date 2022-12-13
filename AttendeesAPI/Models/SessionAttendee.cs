@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AttendeesAPI.Models
-{
-    public partial class SessionAttendee
-    {
+namespace AttendeesAPI.Models {
+    public partial class SessionAttendee {
         public int SessionAttendeesId { get; set; }
         public int AttendeeId { get; set; }
         public int SessionId { get; set; }

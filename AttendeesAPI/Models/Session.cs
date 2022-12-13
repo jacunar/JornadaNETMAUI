@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace AttendeesAPI.Models
-{
-    public partial class Session
-    {
-        public Session()
-        {
+namespace AttendeesAPI.Models {
+    public partial class Session {
+        public Session() {
             SessionAttendees = new HashSet<SessionAttendee>();
         }
 

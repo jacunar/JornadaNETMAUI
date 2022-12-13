@@ -3,27 +3,21 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace AttendeesAPI.Models
-{
-    public partial class AttendeesContext : DbContext
-    {
-        public AttendeesContext()
-        {
+namespace AttendeesAPI.Models {
+    public partial class AttendeesContext : DbContext {
+        public AttendeesContext() {
         }
 
         public AttendeesContext(DbContextOptions<AttendeesContext> options)
-            : base(options)
-        {
+            : base(options) {
         }
 
-        public virtual DbSet<Attendee> Attendees { get; set; }
-        public virtual DbSet<Session> Sessions { get; set; }
-        public virtual DbSet<SessionAttendee> SessionAttendees { get; set; }
+        public virtual DbSet<Attendee> Attendees { get; set; } = null!;
+        public virtual DbSet<Session> Sessions { get; set; } = null!;
+        public virtual DbSet<SessionAttendee> SessionAttendees { get; set; } = null!;
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Attendee>(entity =>
-            {
+        protected override void OnModelCreating(ModelBuilder modelBuilder) {
+            modelBuilder.Entity<Attendee>(entity => {
                 entity.Property(e => e.AttendanceDate).HasColumnType("datetime");
 
                 entity.Property(e => e.Location)
@@ -39,15 +33,13 @@ namespace AttendeesAPI.Models
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<Session>(entity =>
-            {
+            modelBuilder.Entity<Session>(entity => {
                 entity.Property(e => e.Name)
                     .HasMaxLength(100)
                     .IsUnicode(false);
             });
 
-            modelBuilder.Entity<SessionAttendee>(entity =>
-            {
+            modelBuilder.Entity<SessionAttendee>(entity => {
                 entity.HasKey(e => e.SessionAttendeesId)
                     .HasName("PK__SessionA__5F28A6C323AAC996");
 
