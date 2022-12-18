@@ -18,6 +18,5 @@ namespace AttendeesAPI.Repository {
                 _set.Remove(attendee);
             return Task.CompletedTask;
         }
-
     }
 }
