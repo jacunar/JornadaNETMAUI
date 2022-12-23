@@ -1,8 +1,4 @@
-﻿using AttendeesAPI.Models;
-using AttendeesAPI.Repository.Base;
-using Microsoft.EntityFrameworkCore;
-
-namespace AttendeesAPI.Repository {
+﻿namespace AttendeesAPI.Repository {
     public class AttendeesRepository : GenericRepository<Attendee, AttendeesContext> {
         public AttendeesRepository(AttendeesContext context) : base(context) {
 
