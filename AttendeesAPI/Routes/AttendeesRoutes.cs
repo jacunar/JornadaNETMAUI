@@ -23,7 +23,7 @@ namespace AttendeesAPI.Routes {
 
             async Task<IResult> PostAttendee(AttendeesRepository repository, NewAttendeeDTO newAttendee) {
                 var attendee = await repository.PostAsync(newAttendee.ToAttendee());
-                repository.SaveChangesAsync();
+                await repository.SaveChangesAsync();
                 return Results.Ok(attendee.ToAttendeeDTO());
             }
         }
