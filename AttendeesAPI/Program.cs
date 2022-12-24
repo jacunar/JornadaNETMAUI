@@ -1,5 +1,6 @@
 using AttendeesAPI.Models;
 using AttendeesAPI.Repository;
+using AttendeesAPI.Routes;
 using NuGet.Protocol;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +19,7 @@ if (app.Environment.IsDevelopment()) {
     app.UseSwaggerUI();
 }
 
-app.MapGet("/attendees", (AttendeesContext context) => context.Attendees.ToList());
+app.AddAttendeesRoutes();
 
 app.UseHttpsRedirection();
 

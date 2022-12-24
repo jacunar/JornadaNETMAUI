@@ -2,3 +2,4 @@
 global using AttendeesAPI.Repository.Base;
 global using Microsoft.EntityFrameworkCore;
 global using AttendeesAPI.Repository;
+global using AttendeesDTOs;
