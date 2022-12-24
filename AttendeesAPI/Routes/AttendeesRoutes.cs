@@ -9,8 +9,8 @@ namespace AttendeesAPI.Routes {
             app.MapGet(ENDPOINT, GetAttendees).WithTags(ENDPOINT);
             app.MapGet(ENDPOINT + "/{id}", GetAttendeeById).WithTags(ENDPOINT);
             app.MapPost(ENDPOINT, PostAttendee).WithTags(ENDPOINT);
-            //app.MapPut(ENDPOINT + "/{id}", PutAttendee).WithTags(ENDPOINT);
-            //app.MapDelete(ENDPOINT + "/{id}", DeleteAttendee).WithTags(ENDPOINT);
+            app.MapPut(ENDPOINT + "/{id}", PutAttendee).WithTags(ENDPOINT);
+            app.MapDelete(ENDPOINT + "/{id}", DeleteAttendee).WithTags(ENDPOINT);
             return app;
 
             async Task<IResult> GetAttendees(AttendeesRepository repository)
@@ -25,6 +25,31 @@ namespace AttendeesAPI.Routes {
                 var attendee = await repository.PostAsync(newAttendee.ToAttendee());
                 await repository.SaveChangesAsync();
                 return Results.Ok(attendee.ToAttendeeDTO());
+            }
+        
+            async Task<IResult> PutAttendee(AttendeesRepository repository, int id, NewAttendeeDTO newAttendeeDTO) {
+                var existingAttendee = await repository.GetAsync(id);
+                if (existingAttendee is not null) {
+                    existingAttendee.AttendanceDate = newAttendeeDTO.AttendanceDate;
+                    existingAttendee.Location = newAttendeeDTO.Location;
+                    existingAttendee.Name = newAttendeeDTO.Name;
+                    existingAttendee.PhotoUrl = newAttendeeDTO.PhotoUrl;
+
+                    await repository.PutAsync(existingAttendee);
+                    await repository.SaveChangesAsync();
+                    return Results.Ok();
+                } else
+                    return Results.NotFound();
+            }
+
+            async Task<IResult> DeleteAttendee(AttendeesRepository repository, int id) {
+                var existingAttendee = await repository.GetAsync(id);
+                if(existingAttendee is not null) {
+                    await repository.DeleteAsync(id);
+                    await repository.SaveChangesAsync();
+                    return Results.Ok();
+                }
+                return Results.NotFound();
             }
         }
     }
