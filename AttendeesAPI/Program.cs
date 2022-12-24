@@ -1,8 +1,3 @@
-using AttendeesAPI.Models;
-using AttendeesAPI.Repository;
-using AttendeesAPI.Routes;
-using NuGet.Protocol;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
@@ -20,6 +15,8 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.AddAttendeesRoutes();
+app.AddSessionAttendeeRoutes();
+app.AddSessionsRoutes();
 
 app.UseHttpsRedirection();
 
