@@ -11,4 +11,8 @@
     public record SessionDTO(int Id, string Name);
 
     public record SessionAttendeeDTO(int Id, int SessionId, int AttendeeId);
+
+    public record NewUserDTO(string UserName, string Password, string Email, string PhoneNumber, string Address);
+
+    public record LoginCredentialsDTO(string UserName, string Password);
 }
